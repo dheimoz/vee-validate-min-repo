@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>SchemaFormWithVee</h1>
+    <SchemaFormWithVee :schema="schema" v-model="FormData" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import { ref, shallowRef } from "vue";
+import VeeValidatePlugin from "@formvuelate/plugin-vee-validate";
+import { SchemaFormFactory } from "formvuelate";
+const SchemaFormWithVee = SchemaFormFactory([VeeValidatePlugin()]);
+// import BaseInput from "@/components/BaseInput";
 export default {
   name: "Home",
   components: {
-    HelloWorld
-  }
+    SchemaFormWithVee,
+    // eslint-disable-next-line vue/no-unused-components
+    // BaseInput,
+  },
+  setup() {
+    const schema = shallowRef({
+      banco: {
+        component: "base-text",
+        name: "Test",
+        label: "A label",
+      },
+    });
+    const FormData = ref({});
+    return { schema, FormData };
+  },
 };
 </script>

@@ -1,7 +1,9 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+import BaseInput from "@/components/BaseInput";
 
-createApp(App)
-  .use(router)
-  .mount("#app");
+const app = createApp(App);
+app.component("base-text", BaseInput);
+app.use(router);
+app.mount("#app");
